@@ -48,10 +48,10 @@ class Buttons:
             event='release',
             handler=self.on_down_released())
         # Button
-        touch._cap1166.on(
-            channel=touch.BUTTON,
-            event='press',
-            handler=self.on_button_pressed())
+        #touch._cap1166.on(
+        #    channel=touch.BUTTON,
+        #    event='press',
+        #    handler=self.on_button_pressed())
 
     def __del__(self):
         self.redis_pubsub.unsubscribe()
@@ -76,10 +76,11 @@ class Buttons:
             self.redis_server.publish(REDIS_CHANNEL, 'down_stop')
         return func
 
-    def on_button_pressed(self):
-        def func(ch, event):
-            self.redis_server.publish(REDIS_CHANNEL, 'toggle')
-        return func
+    # TODO: create a toggle function on the relay - I never actually created i
+    #def on_button_pressed(self):
+    #    def func(ch, event):
+    #        self.redis_server.publish(REDIS_CHANNEL, 'toggle')
+    #    return func
 
     def on_up_preset_pressed(self):
         def func(ch, event):
